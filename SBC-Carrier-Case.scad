@@ -100,13 +100,13 @@ solar_y                 = 38.5;
 solar_z                 = 11.3;
 
 
-mirror([1,0,0])
-{
+//mirror([1,0,0])
+//{
     esp_carrier();
-}
-//sbc_carrier();
-//ups_carrier();
-//case();
+//}
+sbc_carrier();
+ups_carrier();
+case();
 
 /************
 *  modules  *
@@ -189,7 +189,7 @@ module case()
     }
     
     // solar box
-    translate([backplane_x-solar_x-2*backplane_wall,5,0])
+    translate([backplane_x-solar_x-2*backplane_wall,8,0])
     {
         solar(x=solar_x,
               y=solar_y,
@@ -249,30 +249,32 @@ module battery_box(x,y,h,wall)
 // solar box
 module solar(x,y,z,wall)
 {
+    overhang = 7;
+    
     difference()
     {
-        cube_round([x,y,z]+[2*wall,2*wall-5,wall],mki=2);
+        cube_round([x,y,z]+[2*wall,2*wall-overhang,wall],mki=2);
         translate([wall,wall,wall])
         {
-            cube([x,y+wall-5,z]);
+            cube([x,y+wall-overhang,z]);
         }
-        translate([wall,-5,wall])
+        translate([wall,-overhang,wall])
         {
-            cube([x,y-5,3.2]);
+            cube([x,y-overhang,3.2]);
         }
     }
-    translate([wall,y+wall-5,wall])
+    translate([wall,y+wall-overhang,wall])
     {
         cube([x,wall,3.2]);
     }
-    translate([wall,y-wall-5,wall])
+    translate([wall,y-wall-overhang,wall])
     {
         cube([x,2*wall,1.3]);
     }
-    translate([wall+x/2-5/2,0,wall])
+    /*translate([wall+x/2-5/2,0,wall])
     {
-        cube([5,2*wall,1.3]);
-    }
+        #cube([5,2*wall,1.3]);
+    }*/
 }
 
 // esp carrier
