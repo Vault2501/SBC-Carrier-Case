@@ -1,112 +1,251 @@
 $fn=32;
 
+/**************************
+*  select what to render  *
+**************************/
+
+// set true for objects you want to render
+select_case     = true;
+select_ups      = false;
+select_sbc      = false;
+select_sbc2     = false;
+select_esp      = false;
+select_solar    = true;
+select_battery  = true;
+
+/*******************
+*  render options  * 
+*******************/
+
+// render selected objects mirrored
+option_mirrored = false;
+
+/********************
+* important values  *
+********************/
+
+// case length
+case_x              = 120;
+// case_width
+case_y              = 100;
+// case wall thickness
+case_wall           = 1.8;
+// case screw diameter
+case_screw          = 3;
+// case screw distance (they will always be aligned to the middle)
+case_screw_distance = 77.5;
+// number of slots
+slots               = 3;
+// distance between slots
+slot_distance       = 27.2;
+
+
+
 /*********************
 *  board dimensions  *
 *********************/
 
-// raspberry pi 4b
+// these values are used for the board carrier
+// rpi4b length
 sbc_x = 85;
+// rpi4b width
 sbc_y = 56;
+// rpi4b screw diameter
 sbc_screw_dia = 2.7;
+// rpib4 screw distance x from lower left corner
 sbc_screw_rim_x = 3.5;
+// rpi4b screw distance x between left and right screws 
 sbc_screw_x     = 58;
+// rpib4 screw distance y from lower bottom corner
 sbc_screw_rim_y = 3.5;
+// rpi4b screw distance y between top and bottom screws
 sbc_screw_y     = 49;
+// height of screwhole on top of rpi4b carrier
 sbc_screw_h     = 3;
 
 // ups dimensions
+// ups length
 ups_x           = 85;
+// ups width
 ups_y           = 56;
+// ups screw diameter
 ups_screw_dia   = 2.7;
+// ups screw distance x from lower left corner
 ups_screw_rim_x = 3.5;
+// ups screw distance x between left and right screws 
 ups_screw_x     = 58;
+// rpi4b screw distance y from lower bottom corner
 ups_screw_rim_y = 3.5+5;
+// ups screw distance y between top and bottom screws
 ups_screw_y     = 49;
+// height of screwhole on top of ups carrier
 ups_screw_h     = 3;
 
 // esp32 dimensions
+// TTGO esp32 lora module length
 esp_x           = 64.47;
+// TTGO esp32 lora module width
 esp_y           = 27;
-esp_screw_dia   = 2;
+// TTGO esp32 lora module screw diameter
+esp_screw_dia   = 2.5;
+// TTGO esp32 lora module screw distance x from lower left corner
 esp_screw_rim_x = 2.56;
+// TTGO esp32 lora module screw distance x between left and right screws 
 esp_screw_x     = 0;
+// rpi4b screw distance y from lower bottom corner
 esp_screw_rim_y = 3.44;
+// TTGO esp32 lora module screw distance y between top and bottom screws
 esp_screw_y     = 22.15;
+// height of screwhole on top of TTGO esp32 lora module carrier
+esp_screw_h     = 6;
 
+// battery dimensions
+// battery lenght
+// battery width
+battery_w               = 60;
+// battery height
+battery_h               = 11;
+
+// solar adapeter -> USB
+// solar -> usb adapter width
+solar_x                 = 19.6;
+// solar -> usb adpater length
+solar_y                 = 20;
+// solar -> usb adapter height
+solar_z                 = 11.3;
 
 // raspberry pi zero 2W
-/*
-sbc_x           = 65;
-sbc_y           = 30;
-sbc_screw_dia   = 2.7;
-sbc_screw_rim_x = 3.5;
-sbc_screw_x     = 58;
-sbc_screw_rim_y = 3.5;
-sbc_screw_y     = 23;
-sbc_screw_h     = 0.4;
-
-// ups dimensions
-ups_x           = 0;
-ups_y           = 0;
-ups_screw_dia   = 2.7;
-ups_screw_rim_x = 3.5;
-ups_screw_x     = 58;
-ups_screw_rim_y = 3.5;
-ups_screw_y     = 49;
-
-// esp32 dimensions
-esp_x           = 64.47;
-esp_y           = 27;
-esp_screw_dia   = 2;
-esp_screw_rim_x = 2.56;
-esp_screw_x     = 0;
-esp_screw_rim_y = 3.44;
-esp_screw_y     = 22.15;
-*/
+// bPizero length
+sbc2_x           = 65;
+// bPizero width 
+sbc2_y           = 30;
+// bPizero screw diameter
+sbc2_screw_dia   = 2.7;
+// bPizero screw distance x from lower left corner
+sbc2_screw_rim_x = 3.5;
+// bPizero screw distance x between left and right screws
+sbc2_screw_x     = 58;
+// bPizero screw distance y from lower bottom corner
+sbc2_screw_rim_y = 3.5+25;
+// bPizero screw distance y between top and bottom screws
+sbc2_screw_y     = 23;
+// height of screwhole on top of bPizero carrier
+sbc2_screw_h     = 3;
 
 
 /********************
 *  case dimensions  *
 ********************/
 
-// backplane
-backplane_y             = 100;
-backplane_x             = 120;
-backplane_wall          = 1.8;
-backplane_screw_dia     = 2.7;
+// case dimension
+backplane_y             = case_y;
+backplane_x             = case_x;
+backplane_wall          = case_wall;
+backplane_screw_dia     = case_screw;
 backplane_screw_x       = 0;
 backplane_screw_rim_x   = backplane_x/2;
-backplane_screw_y       = 77.5;
+backplane_screw_y       = case_screw_distance;
 backplane_screw_rim_y   = (backplane_y - backplane_screw_y)/2;
-backplane_slots         = 3;
+backplane_slots         = slots;
 
-// carrier
+// carrier values
 carrier_frame_x         = max(sbc_x,ups_x,esp_x);
 carrier_frame_y         = max(sbc_y,ups_y,esp_y);
+// carrier height
 carrier_frame_height    = 3;
+// carrier addition
 carrier_frame_addition  = 5;
+// default carrier screw height on top of carrier
 carrier_screw_h         = 5;
-carrier_distance        = 27.2;
+// change this value to adjust the distance between the boards
+carrier_distance        = slot_distance;
+// change this value for tighter or looser fitting of the board carrier
 carrier_gap             = 0.55;
 
-// battery
+// calculate battery size
 battery_x               = backplane_x-2*backplane_wall;
-battery_y               = max(60,carrier_frame_y+2*carrier_frame_addition);
-battery_h               = 11;
-
-// solar adapter
-solar_x                 = 19.5;
-solar_y                 = 38.5;
-solar_z                 = 11.3;
+battery_y               = max(battery_w,carrier_frame_y+2*carrier_frame_addition);
 
 
-//mirror([1,0,0])
-//{
-    esp_carrier();
-//}
-sbc_carrier();
-ups_carrier();
-case();
+/************************
+*  main render section  *
+************************/
+
+if(select_esp)
+{
+    if(option_mirrored)
+    {
+        mirror([1,0,0])
+        {
+            esp_carrier();
+        }
+    }
+    else
+    {
+        esp_carrier();
+    }
+}
+
+if(select_sbc)
+{
+    if(option_mirrored)
+    {
+        mirror([1,0,0])
+        {
+            sbc_carrier();
+        }
+    }
+    else
+    {
+        sbc_carrier();
+    }
+}
+
+if(select_sbc2)
+{
+    if(option_mirrored)
+    {
+        mirror([1,0,0])
+        {
+            sbc2_carrier();
+        }
+    }
+    else
+    {
+        sbc2_carrier();
+    }
+}
+    
+if(select_ups)
+{
+    if(option_mirrored)
+    {
+        mirror([1,0,0])
+        {
+            ups_carrier();
+        }
+    }
+    else
+    {
+        ups_carrier();
+    }
+}
+
+if(select_case)
+{
+    if(option_mirrored)
+    {
+        mirror([1,0,0])
+        {
+            case();
+        }
+    }
+    else
+    {
+        case();
+    }
+}
+
 
 /************
 *  modules  *
@@ -180,23 +319,29 @@ module case()
     }
 
     // battery box
-    translate([0,backplane_y-2*backplane_wall-battery_h,backplane_wall])
+    if(select_battery)
     {
-        battery_box(x=battery_x,
-                    y=battery_y,
-                    h=battery_h,
-                    wall=backplane_wall);
+        translate([0,backplane_y-2*backplane_wall-battery_h,backplane_wall])
+        {
+            battery_box(x=battery_x,
+                        y=battery_y,
+                        h=battery_h,
+                        wall=backplane_wall);
+        }
     }
     
     // solar box
-    translate([backplane_x-solar_x-2*backplane_wall,8,0])
+    if(select_solar)
     {
-        solar(x=solar_x,
-              y=solar_y,
-              z=solar_z,
-              wall=backplane_wall);
+        translate([backplane_x-solar_x-2*backplane_wall,2*carrier_distance,0])
+        {
+            solar(x=solar_x,
+                  y=solar_y,
+                  z=solar_z,
+                  wall=backplane_wall);
+        }
     }
-
+    
     // carrier holder
     carrier_holder(height1=carrier_frame_y+2*carrier_frame_addition,
                    height2=carrier_frame_addition,
@@ -249,12 +394,12 @@ module battery_box(x,y,h,wall)
 // solar box
 module solar(x,y,z,wall)
 {
-    overhang = 7;
+    overhang = 0;
     
     difference()
     {
-        cube_round([x,y,z]+[2*wall,2*wall-overhang,wall],mki=2);
-        translate([wall,wall,wall])
+        cube_round([x,y,z]+[2*wall,0-overhang,2*wall],mki=2);
+        translate([wall,0,wall])
         {
             cube([x,y+wall-overhang,z]);
         }
@@ -263,14 +408,14 @@ module solar(x,y,z,wall)
             cube([x,y-overhang,3.2]);
         }
     }
-    translate([wall,y+wall-overhang,wall])
+    /*translate([wall,y+wall-overhang,wall])
     {
         cube([x,wall,3.2]);
     }
     translate([wall,y-wall-overhang,wall])
     {
         cube([x,2*wall,1.3]);
-    }
+    }*/
     /*translate([wall+x/2-5/2,0,wall])
     {
         #cube([5,2*wall,1.3]);
@@ -324,6 +469,30 @@ module sbc_carrier()
         }
     }
 }
+module sbc2_carrier()
+{
+    translate([backplane_wall,
+               backplane_wall+carrier_distance+carrier_frame_addition-2,
+               backplane_wall+carrier_frame_y+2*carrier_frame_addition-0.8])
+    {
+        rotate([270,0,0])
+        {
+            carrier(x=carrier_frame_x,
+                    y=carrier_frame_y,
+                    frame_height=carrier_frame_height-carrier_gap,
+                    frame_addition=carrier_frame_addition-carrier_gap,
+                    screw_rim_x=sbc2_screw_rim_x,
+                    screw_x=sbc2_screw_x,
+                    screw_rim_y=sbc2_screw_rim_y,
+                    screw_y=sbc2_screw_y,
+                    screw_h=sbc2_screw_h,
+                    screw_dia=sbc2_screw_dia,
+                    cut_sides="xy");
+        }
+    }
+}
+
+
 
 // ups carrier
 module ups_carrier()
